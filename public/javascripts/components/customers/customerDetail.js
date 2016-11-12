@@ -45,6 +45,13 @@ angular.module('customers')
           }
 
     }; 
+
+    $ctrl.delete = function(){
+    $http.delete('/api/customers/'+id).
+    then(function(res){
+      $ctrl.$router.navigate(['CustomerList'])
+    })
+    }
   }
 
 })(window.angular);

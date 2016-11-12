@@ -63,11 +63,24 @@ router.post("/api/cars", function(req,res){
 });
 
 router.delete("/api/cars/:id", function(req,res){
-  res.json({
-  		price: 50,
-  		brand: "Volvo",
-  		registrationNumber: "ABC123"
-  	});
+  var id = req.params.id;
+  Car.findById(id, function (err, car) {
+    Car.findById(req.params.id, function(err, car){
+    if (err){
+      console.log(err)
+      return res.sendStatus(404);
+    }else{
+      car.remove(function(err, carRemoved){
+        if (err){
+          console.log(err)
+          return res.sendStatus(404);
+        }else{
+          res.json(carRemoved);
+        }
+      });
+    }
+    });
+  });
 });
 
 module.exports = router;

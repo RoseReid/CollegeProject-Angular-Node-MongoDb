@@ -45,6 +45,12 @@ angular.module('cars')
           }
 
     }; 
+    $ctrl.delete = function(){
+    $http.delete('/api/cars/'+id).
+    then(function(res){
+      $ctrl.$router.navigate(['CarList'])
+    })
+    }
   }
 
 })(window.angular);

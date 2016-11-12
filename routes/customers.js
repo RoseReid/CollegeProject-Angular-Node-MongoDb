@@ -63,11 +63,24 @@ router.post("/api/customers", function(req,res){
 });
 
 router.delete("/api/customers/:id", function(req,res){
-  res.json({
-      name: Zeldis,
-      age: 5,
-      phoneNumber: "1234"
+  var id = req.params.id;
+  Customer.findById(id, function (err, customer) {
+    Customer.findById(req.params.id, function(err, customer){
+    if (err){
+      console.log(err)
+      return res.sendStatus(404);
+    }else{
+      customer.remove(function(err, customerRemoved){
+        if (err){
+          console.log(err)
+          return res.sendStatus(404);
+        }else{
+          res.json(customerRemoved);
+        }
+      });
+    }
     });
+  });
 });
 
 module.exports = router;

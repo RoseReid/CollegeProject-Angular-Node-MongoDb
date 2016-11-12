@@ -17,4 +17,4 @@ const employeeSchema = new mongoose.Schema({
 	// employee: [{type: mongoose.Schema.Types.ObjectId, ref: 'employee'}],
 }, {timestamps: true});
 
-exports.Model = db.model('employee', employeeSchema);
+exports.Model = db.model('Employee', employeeSchema);
