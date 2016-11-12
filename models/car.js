@@ -17,8 +17,8 @@ const carSchema = new mongoose.Schema({
 	model: {type:String, required:true},
 	year: {type:String, required:true},
 	registrationNumber: {type: String, required: true},
-	customer: {type:mongoose.Schema.Types.ObjectId, ref: 'Customer'},
-	employee: {type:mongoose.Schema.Types.ObjectId, ref: 'Employee'}
+	customer: [{type:mongoose.Schema.Types.ObjectId, ref: 'Customer'}],
+	employee: [{type:mongoose.Schema.Types.ObjectId, ref: 'Employee'}]
 }, {timestamps: true});
 
 exports.Model = db.model('Car', carSchema);
