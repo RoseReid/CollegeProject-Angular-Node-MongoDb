@@ -1,0 +1,8 @@
+<h2>Cars</h2>
+<a ng-link="['AddCar']">Add Car</a>
+<div ng-repeat="car in $ctrl.cars">
+	<a ng-link="['CarDetail', {id: car._id}]">{{car.registrationNumber}}</a>
+</div>
+
+
+<!-- "_id":"581b846d4190fe37b5ca89a3","updatedAt":"2016-11-03T18:39:41.970Z","createdAt":"2016-11-03T18:39:41.970Z","make":"Zelda","model":"Volvo","year":"ABC123","__v":0} -->

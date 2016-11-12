@@ -1,0 +1,6 @@
+<h2>Customers</h2>
+<a ng-link="['AddCustomer']">Add Customer</a>
+
+<div ng-repeat="customer in $ctrl.customers">
+	<a ng-link="['CustomerDetail', {id: customer._id}]">{{customer.name}}</a>
+</div>

@@ -1,0 +1,19 @@
+<h2>Employee</h2>
+
+<form ng-submit="$ctrl.save()">
+	<label> Name	
+		<input ng-model="$ctrl.employee.name"/>
+ 	</label>
+ 	<label> Age
+		<input ng-model="$ctrl.employee.age"/>
+ 	</label>
+ 	<label> Phone Number	
+		<input ng-model="$ctrl.employee.phoneNumber"/>
+ 	</label>
+ 	<input type="submit" value="Save"/>
+ 	<input type="button" value="Delete" ng-click="$ctrl.delete()"/>
+
+</form>
+
+
+

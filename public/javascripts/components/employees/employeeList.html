@@ -1,0 +1,6 @@
+<h2>Employees</h2>
+<a ng-link="['AddEmployee']">Add Employee</a>
+
+<div ng-repeat="employee in $ctrl.employees">
+	<a ng-link="['EmployeeDetail', {id: employee._id}]">{{employee.name}}</a>
+</div>
