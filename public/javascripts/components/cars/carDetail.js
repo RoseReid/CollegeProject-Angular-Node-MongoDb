@@ -24,7 +24,23 @@ angular.module('cars')
               $ctrl.car = res.data;
             });
       }
+
+      $http.get('/api/customers').
+      then(function(res){  //http get returns a promise
+        console.log(res)
+        $ctrl.customers = res.data;
+      });
+
+      $http.get('/api/employees').
+      then(function(res){  //http get returns a promise
+        console.log(res)
+        $ctrl.employees = res.data;
+      });
+
+
     };
+
+
 
      $ctrl.save = function(){
 

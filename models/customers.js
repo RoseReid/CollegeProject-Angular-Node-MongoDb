@@ -15,9 +15,17 @@ db.once('open', function() {
 const customerSchema = new mongoose.Schema({
 	name: {type:String, required:true},
 	age: {type:String, required:true},
-	phoneNumber: {type: String, required: true}
-	// customer: [{type: mongoose.Schema.Types.ObjectId, ref: 'customer'}],
-	// employee: [{type: mongoose.Schema.Types.ObjectId, ref: 'employee'}],
+	phoneNumber: {type: String, required: true},
+	address: {
+		name: String, 
+	    address: String, 
+	    city: String, 
+	    state: String, 
+	    country: String, 
+	    zipCode: Number, 
+	    createdOn: Date, 
+	    isActive:  Boolean
+	}
 }, {timestamps: true});
 
 exports.Model = db.model('Customer', customerSchema);

@@ -1,6 +1,11 @@
 <h2>Cars</h2>
-<a ng-link="['AddCar']">Add Car</a>
-<div ng-repeat="car in $ctrl.cars">
+<div><a ng-link="['AddCar']">Add Car</a></div>
+<div><input type="search" ng-model="q.$" placeholder="search car" /></div>
+<div>
+<span ng-click="q.isUnderRepair=undefined">All</span>
+<span ng-click="q.isUnderRepair=true">UnderRepair</span>
+</div>
+<div ng-repeat="car in $ctrl.cars | filter:q as results">
 	<a ng-link="['CarDetail', {id: car._id}]">{{car.registrationNumber}}</a>
 </div>
 

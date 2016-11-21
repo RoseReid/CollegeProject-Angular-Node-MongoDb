@@ -12,9 +12,7 @@ db.once('open', function() {
 const employeeSchema = new mongoose.Schema({
 	name: {type:String, required:true},
 	age: {type:String, required:true},
-	phoneNumber: {type: String, required: true},
-	// customer: [{type: mongoose.Schema.Types.ObjectId, ref: 'customer'}],
-	// employee: [{type: mongoose.Schema.Types.ObjectId, ref: 'employee'}],
+	phoneNumber: {type: String, required: true},	
 }, {timestamps: true});
 
 exports.Model = db.model('Employee', employeeSchema);

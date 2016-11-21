@@ -14,13 +14,9 @@ angular.module('app', ['ngComponentRouter', 'cars', 'customers', 'employees'])
 .value('$routerRootComponent', 'app')
 
 .component('app', {
-  template:
-    '<nav>\n' +
-    '  <a ng-link="[\'Cars\']">Cars</a>\n' +
-    '  <a ng-link="[\'Customers\']">Customers</a>\n' +
-    '  <a ng-link="[\'Employees\']">Employees</a>\n' +
-    '</nav>\n' +
-    '<ng-outlet></ng-outlet>\n',
+templateUrl: '/javascripts/components/navbar.html',
+
+
   $routeConfig: [
     {path: '/cars/...', name: 'Cars', component: 'cars', useAsDefault: true},
     {path: '/customers/...', name: 'Customers', component: 'customers' },

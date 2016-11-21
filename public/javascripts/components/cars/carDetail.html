@@ -13,6 +13,20 @@
  	<label> Year	
 		<input ng-model="$ctrl.car.year"/>
  	</label>
+ 	<label for="repeatSelect"> Customer select: </label>
+    <select name="repeatSelect" id="repeatSelect" ng-model="$ctrl.car.customer">
+      <option ng-repeat="option in $ctrl.customers" value="{{option._id}}">{{option.name}}</option>
+    </select>
+    <label for="repeatSelectEmployee"> Employee select: </label>
+    <select name="repeatSelectEmployee" id="repeatSelectEmployee" ng-model="$ctrl.car.employee">
+      <option ng-repeat="option in $ctrl.employees" value="{{option._id}}">{{option.name}}</option>
+    </select>
+<div>
+<label> Is under repair
+  <input type="checkbox" ng-model="$ctrl.car.isUnderRepair"/>
+</label>
+</div>
  	<input type="submit" value="Save"/>
  	<input type="button" value="Delete" ng-click="$ctrl.delete()"/>
+
 </form>

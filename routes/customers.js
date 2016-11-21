@@ -34,7 +34,7 @@ router.put("/api/customers/:id", function(req,res){
       console.log(err)
       return res.sendStatus(404);
     }else{
-      customer.set(customerData);
+      customer.set(customerData); //set all the values Customer has in Customer data
       customer.save(function(err, customerSaved){
         if (err){
           console.log(err)
