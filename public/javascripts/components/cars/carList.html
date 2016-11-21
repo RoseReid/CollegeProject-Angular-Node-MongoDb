@@ -7,6 +7,7 @@
 </div>
 <div ng-repeat="car in $ctrl.cars | filter:q as results">
 	<a ng-link="['CarDetail', {id: car._id}]">{{car.registrationNumber}}</a>
+	<span>{{car.make}}</span><span>{{car.customer}}</span><span>{{car.employee}}</span>
 </div>
 
 

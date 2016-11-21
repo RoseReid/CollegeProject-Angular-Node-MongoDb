@@ -10,6 +10,12 @@
  	<label> Phone Number	
 		<input ng-model="$ctrl.customer.phoneNumber"/>
  	</label>
+ 	<label> Address 	
+		<input ng-model="$ctrl.customer.address.street"/>
+		<div> City<input ng-model="$ctrl.customer.address.city"/></div>
+		<div> State<input ng-model="$ctrl.customer.address.state"/></div>
+		<div> Zip code<input ng-model="$ctrl.customer.address.zipCode"/></div>
+ 	</label>
  	
  	<input type="submit" value="Save"/>
  	<input type="button" value="Delete" ng-click="$ctrl.delete()"/>

@@ -12,20 +12,18 @@ db.once('open', function() {
   // we're connected!
 });
 
+const address = new mongoose.Schema({
+	street: String, 
+    city: String, 
+    state: String, 
+    zipCode: Number 
+});
+
 const customerSchema = new mongoose.Schema({
 	name: {type:String, required:true},
 	age: {type:String, required:true},
 	phoneNumber: {type: String, required: true},
-	address: {
-		name: String, 
-	    address: String, 
-	    city: String, 
-	    state: String, 
-	    country: String, 
-	    zipCode: Number, 
-	    createdOn: Date, 
-	    isActive:  Boolean
-	}
+	address: {type: address, default: {}}
 }, {timestamps: true});
 
 exports.Model = db.model('Customer', customerSchema);
