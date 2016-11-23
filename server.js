@@ -42,6 +42,7 @@ passport.deserializeUser(function(id, cb) {
 var app = express();
 
 app.use(require('morgan')('combined'));
+app.use(compress({threshold : 0}));
 
 app.use(require('node-sass-middleware')({
   src: path.join(__dirname, 'public'),
@@ -62,7 +63,6 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: false, save
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 //app.use(logger('dev'));
-//app.use(compress());
 //app.use(bodyParser.json());
 //app.use(bodyParser.urlencoded({ extended: false }));
 //app.use(cookieParser());
@@ -72,7 +72,13 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: false, save
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/login', express.static(path.join(__dirname, 'public/login')));
+app.use(function(req, res, next) {
+  res.setHeader('x-client-id', req.sessionID)
+  next();
+});
+
+var cachetime = 3600;
+app.use('/login', express.static(path.join(__dirname, 'public/login'), { maxAge: cachetime }));
 
 
   
@@ -82,8 +88,15 @@ app.post('/login',
     res.redirect('/');
   });
 
+
 app.use('/', require('connect-ensure-login').ensureLoggedIn())
-app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function(req, res, next) {
+  res.setHeader('x-usermane', req.user.username)
+  next();
+});
+
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: cachetime }));
 
 
 app.use('/', cars);
