@@ -1,14 +1,14 @@
 'use strict'
 var express = require('express');
 var router = express.Router();
-var Car = require('./../models/car.js').Model;
-// var carRepository = require('./../repository/mongoose/carRepository.js').Model;
+// var Car = require('./../models/car.js').Model;
+var carRepository = require('./../repository/mongoose/carRepository.js');
 
 
 
 router.get("/api/cars", function(req,res){
 
-  Car.find(function (err, cars) {
+  carRepository.getAllCars(function (err, cars) {
     if (err) {
       return res.sendStatus(404);
     }
@@ -19,7 +19,7 @@ router.get("/api/cars", function(req,res){
 
 router.get("/api/cars/:id", function(req,res){
   var id = req.params.id;
-  Car.findById(id, function (err, car) {
+  carRepository.getCarById(id, function (err, car) {
     if (err) {
       console.log(err)
       return res.sendStatus(404);
@@ -31,29 +31,19 @@ router.get("/api/cars/:id", function(req,res){
 router.put("/api/cars/:id", function(req,res){
   var carData = req.body;
 
-  Car.findById(req.params.id, function(err, car){
-    if (err){
-      console.log(err)
-      return res.sendStatus(404);
-    }else{
-      car.set(carData);
-      car.save(function(err, carSaved){
+carRepository.updateCarById(req.params.id, carData, function(err, carSaved){
         if (err){
           console.log(err)
           return res.sendStatus(404);
         }else{
           res.json(carSaved);
         }
-      });
-    }
   });
 });
 
 router.post("/api/cars", function(req,res){
   var carData = req.body;
-  var car = new Car(carData);
-  
-  car.save(function(err, carSaved){
+ carRepository.createCar(carData, function(err, carSaved){
       if (err){
         console.log(err)
         return res.sendStatus(404);
@@ -66,24 +56,15 @@ router.post("/api/cars", function(req,res){
 
 router.delete("/api/cars/:id", function(req,res){
   var id = req.params.id;
-  Car.findById(id, function (err, car) {
-    Car.findById(req.params.id, function(err, car){
-    if (err){
-      console.log(err)
-      return res.sendStatus(404);
-    }else{
-      car.remove(function(err, carRemoved){
-        if (err){
-          console.log(err)
-          return res.sendStatus(404);
-        }else{
-          res.json(carRemoved);
-        }
-      });
-    }
+    carRepository.deleteCar(req.params.id, function(err, deleteCar){
+      if (err){
+        console.log(err)
+        return res.sendStatus(404);
+      }else{
+        res.json(deleteCar);
+      }
     });
   });
-});
 
 module.exports = router;
 
