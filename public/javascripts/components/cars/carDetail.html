@@ -1,18 +1,18 @@
 <h2>Car</h2>
 
 <form ng-submit="$ctrl.save()">
-	<label> Make	
+	<br><label> Make	
 		<input ng-model="$ctrl.car.make"/>
- 	</label>
- 	<label> Registration Number	
+ 	</label><br/>
+ 	<br><label> Registration Number	
 		<input ng-model="$ctrl.car.registrationNumber"/>
- 	</label>
- 	<label> Model	
+ 	</label></br>
+ 	<br><label> Model	
 		<input ng-model="$ctrl.car.model"/>
- 	</label>
- 	<label> Year	
+ 	</label></br>
+ 	<br><label> Year	
 		<input ng-model="$ctrl.car.year"/>
- 	</label>
+ 	</label></br>
  	<label for="repeatSelect"> Customer select: </label>
     <select name="repeatSelect" id="repeatSelect" ng-model="$ctrl.car.customer">
       <option ng-repeat="option in $ctrl.customers" value="{{option._id}}">{{option.name}}</option>

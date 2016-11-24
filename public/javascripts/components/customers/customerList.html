@@ -3,5 +3,6 @@
 
 <div ng-repeat="customer in $ctrl.customers">
 	<a ng-link="['CustomerDetail', {id: customer._id}]">{{customer.name}}</a>
-	<span>{{customer.phoneNumber}}</span><span>{{customer.address.city}}</span>
+	<br><span>{{customer.phoneNumber}}</span></br>
+	<br><span>{{customer.address.city}}</span></br>
 </div>
