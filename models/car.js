@@ -1,13 +1,14 @@
 'use strict';
 
+const mongoose = require('mongoose');
 const Customer = require('./customers.js');
 const Employee = require('./employees.js');
 
-
-const mongoose = require('mongoose');
 const url = 'mongodb://localhost:27017/usedCarShop';
-var db  = mongoose.createConnection(url);
+const db  = mongoose.createConnection(url);
+
 db.on('error', console.error.bind(console, 'connection error:'));
+
 db.once('open', function() {
 	console.log('connected to car info')
 });
@@ -23,5 +24,3 @@ const carSchema = new mongoose.Schema({
 }, {timestamps: true});
 
 exports.Model = db.model('Car', carSchema);
-
-
