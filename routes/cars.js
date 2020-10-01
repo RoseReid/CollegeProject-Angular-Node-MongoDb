@@ -1,72 +1,65 @@
 'use strict'
-var express = require('express');
-var router = express.Router();
-// var Car = require('./../models/car.js').Model;
-var carRepository = require('./../repository/mongoose/carRepository.js');
-// var carRepository = require('./../repository/sequelize/carRepository.js');
+const util = require('util');
+const express = require('express');
+const carRepository = require('./../repository/mongoose/carRepository.js');
 
+const router = express.Router();
 
+const getAllCars = util.promisify(carRepository.getAllCars);
+const getCarById = util.promisify(carRepository.getCarById);
+const updateCarById = util.promisify(carRepository.updateCarById);
+const createCar = util.promisify(carRepository.createCar);
+const deleteCar = util.promisify(carRepository.deleteCar);
 
-
-router.get("/api/cars", function(req,res){
-
-  carRepository.getAllCars(function (err, cars) {
-    if (err) {
-      return res.sendStatus(404);
-    }
-    res.json(cars);
-  });
-
+router.get("/api/cars", async (req,res) => {
+  try {
+    const cars = await getAllCars();
+    return res.json(cars);
+  } catch (e) {
+    return res.sendStatus(404);
+  }
 });
 
-router.get("/api/cars/:id", function(req,res){
-  var id = req.params.id;
-  carRepository.getCarById(id, function (err, car) {
-    if (err) {
-      console.log(err)
-      return res.sendStatus(404);
-    }
-    res.json(car);
-  });
+router.get("/api/cars/:id", async (req,res) => {
+  try {
+    const id = req.params.id;
+    const car = await getCarById(id);
+    return res.json(car);
+  } catch (e) {
+    return res.sendStatus(404);
+  }
 });
 
-router.put("/api/cars/:id", function(req,res){
-  var carData = req.body;
-
-carRepository.updateCarById(req.params.id, carData, function(err, carSaved){
-        if (err){
-          console.log(err)
-          return res.sendStatus(404);
-        }else{
-          res.json(carSaved);
-        }
-  });
+router.put("/api/cars/:id", async (req,res) => {
+  try {
+    const carData = req.body;
+    const id = req.params.id;
+    const carSaved = await updateCarById(id, req.body);
+    return res.json(carSaved);
+  } catch (e) {
+    return res.sendStatus(404);
+  }
 });
 
-router.post("/api/cars", function(req,res){
-  var carData = req.body;
- carRepository.createCar(carData, function(err, carSaved){
-      if (err){
-        console.log(err)
-        return res.sendStatus(404);
-      }else{
-        res.json(carSaved);
-      }
-    });
-    
+router.post("/api/cars", async (req,res) => {
+  try {
+    const carData = req.body;
+    const carSaved = await createCar(carData);
+    return res.json(carSaved);
+  } catch (e) {
+    return res.sendStatus(404);
+  }
 });
 
-router.delete("/api/cars/:id", function(req,res){
-  var id = req.params.id;
-    carRepository.deleteCar(req.params.id, function(err, deleteCar){
-      if (err){
-        console.log(err)
-        return res.sendStatus(404);
-      }else{
-        res.json(deleteCar);
-      }
-    });
-  });
+router.delete("/api/cars/:id", async (req,res) => {
+  try {
+    const id = req.params.id;
+    const result = await deleteCar(id);
+    return res.json(result);
+  } catch (e) {
+    return res.sendStatus(404);
+  }
+});
 
 module.exports = router;
 
